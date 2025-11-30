@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Sparkles, Zap, Layers, ArrowRight, Wand2, Box, Palette } from 'lucide-react'
 import { Pricing } from './components/Pricing'
+import { ParticlesBackground } from './components/ParticlesBackground'
 import './App.css'
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
 
   return (
     <>
+      <ParticlesBackground />
       <div className="bg-glow">
         <div className="glow-blob blob-1"></div>
         <div className="glow-blob blob-2"></div>
