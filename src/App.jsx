@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Sparkles, Zap, Layers, ArrowRight, Wand2, Box, Palette } from 'lucide-react'
+import { Pricing } from './components/Pricing'
 import './App.css'
 
 function App() {
@@ -27,7 +28,7 @@ function App() {
         <div className="nav-links">
           <span className="nav-link">Features</span>
           <span className="nav-link">Showcase</span>
-          <span className="nav-link">Pricing</span>
+          <a href="#pricing" className="nav-link">Pricing</a>
         </div>
       </nav>
 
@@ -163,6 +164,9 @@ function App() {
             </motion.div>
           </div>
         </section>
+
+        {/* Pricing Section */}
+        <Pricing />
 
         {/* Footer */}
         <footer>
