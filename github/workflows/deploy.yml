@@ -3,7 +3,7 @@ name: Deploy project1 to EC2
 on:
   push:
     branches:
-      - main   # <--- CHECK THIS: Change to 'main' if that is your default branch
+      - main # Change to 'main' if your repo uses main
 
 env:
   REGISTRY: ghcr.io
@@ -46,22 +46,19 @@ jobs:
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            # 1. Login to GitHub Container Registry (using the temporary action token)
+            # 1. Login to GitHub Container Registry
             echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
             
             # 2. Pull the new image
             docker pull ghcr.io/${{ env.IMAGE_NAME }}:latest
             
-            # 3. Create network if it doesn't exist (Safety check)
-            docker network create app-network || true
-            
-            # 4. Stop and remove the old container
+            # 3. Stop and remove the old container
             docker stop project1 || true
             docker rm project1 || true
             
-            # 5. Run the new container
+            # 4. Run the new container directly on Port 80
             docker run -d \
               --name project1 \
               --restart unless-stopped \
-              --network app-network \
+              -p 80:80 \
               ghcr.io/${{ env.IMAGE_NAME }}:latest
