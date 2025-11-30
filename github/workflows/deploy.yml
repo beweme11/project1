@@ -3,7 +3,7 @@ name: Deploy project1 to EC2
 on:
   push:
     branches:
-      - master   # <--- CHECK THIS: Change to 'main' if that is your default branch
+      - main   # <--- CHECK THIS: Change to 'main' if that is your default branch
 
 env:
   REGISTRY: ghcr.io
